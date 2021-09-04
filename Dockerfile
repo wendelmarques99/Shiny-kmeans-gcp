@@ -16,11 +16,21 @@ RUN apt-get update -qq && apt-get -y --no-install-recommends install \
 COPY ./ /tmp/app/
 RUN R -e "remotes::install_local('/tmp/app/')"
 
+
 # Copiar arquivos para o lugar certo
 EXPOSE 80/tcp
 RUN rm /srv/shiny-server/index.html
 COPY ./inst/app /srv/shiny-server/
 COPY ./inst/app/shiny-server.conf /etc/shiny-server/shiny-server.conf
+#docker image
+COPY ./inst/app/shiny-server.sh /usr/bin/shiny-server.sh
+
+# allow permission
+RUN sudo chown -R shiny:shiny /srv/shiny-server
+
+RUN ["chmod", "+x", "/usr/bin/shiny-server.sh"]
 
 # Run
 CMD ["/usr/bin/shiny-server.sh"]
+
+
