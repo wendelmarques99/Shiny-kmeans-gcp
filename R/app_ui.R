@@ -2,7 +2,7 @@
 #' App UI
 app_ui <- function() {
   shiny::pageWithSidebar(
-    shiny::headerPanel('Iris k-means clustering - versao wendel-att'),
+    shiny::headerPanel('Iris k-means clustering - versao wendel-att - 2'),
     shiny::sidebarPanel(
       shiny::selectInput('xcol', 'X Variable', names(shinygcp::iris)),
       shiny::selectInput('ycol', 'Y Variable', names(shinygcp::iris),
